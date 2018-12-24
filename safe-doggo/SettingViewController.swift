@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  SettingViewController.swift
 //  safe-doggo
 //
 //  Created by Jaehyuk Rhee on 12/23/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class SettingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
