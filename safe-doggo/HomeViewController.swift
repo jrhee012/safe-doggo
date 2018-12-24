@@ -10,6 +10,9 @@ import UIKit
 import CoreLocation
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate {
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var currentTempLabel: UILabel!
+    
     var long: String!
     var lat: String!
     
@@ -19,6 +22,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        locationLabel.text = "Loading..."
+        currentTempLabel.text = "--"
         
         locationManager.delegate = self
         
@@ -43,17 +48,38 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         print("user latitude = \(userLocation.coordinate.latitude)")
         print("user longitude = \(userLocation.coordinate.longitude)")
         
-//        self.long = String(userLocation.coordinate.longitude)
-//        self.lat = String(userLocation.coordinate.latitude)
+        let lat = String(userLocation.coordinate.latitude)
+        let long = String(userLocation.coordinate.longitude)
         
-        var lat = String(userLocation.coordinate.latitude)
-//        lat = String(lat[lat.startIndex...lat.index(lat.startIndex, offsetBy: 4)])
+        let apiResult = weatherApiClient.makeRequest(lat: lat, long: long)
         
-        var long = String(userLocation.coordinate.longitude)
-//        long = String(long[long.startIndex...long.index(long.startIndex, offsetBy: 4)])
+        let str = apiResult["name"] as? String
         
-        weatherApiClient.makeRequest(lat: lat, long: long)
-//        print(self.long, self.lat)
+//        print(apiResult)
+        
+        // update
+        locationLabel.text = str!
+        
+        let main = apiResult["main"] as! NSDictionary
+//        currentTempLabel.text = "\(main["temp"].unsafelyUnwrapped)"
+        
+        let tempInt = Int(floor(Float("\(main["temp"].unsafelyUnwrapped)")!))
+        print(tempInt)
+        currentTempLabel.text = String(tempInt)
+        
+//        print(main["temp"].unsafelyUnwrapped)
+//        let tempStr = main["temp"]
+        
+//        if let tempStr = main["temp"] as? String {
+//            currentTempLabel.text = tempStr
+//        }
+//
+//        print(main["temp"])
+        
+//        let currenttTempStr: String = main!["temp"]
+//
+//        currentTempLabel.text = currenttTempStr
+//        print(currenttTempStr)
     }
     
 //    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
