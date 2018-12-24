@@ -15,6 +15,7 @@
 		AE5DE69821D0943D005F2206 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE5DE69621D0943D005F2206 /* LaunchScreen.storyboard */; };
 		AE5DE6A321D0943D005F2206 /* safe_doggoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5DE6A221D0943D005F2206 /* safe_doggoTests.swift */; };
 		AE5DE6AE21D0943D005F2206 /* safe_doggoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5DE6AD21D0943D005F2206 /* safe_doggoUITests.swift */; };
+		AE5DE6BC21D09FCF005F2206 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5DE6BB21D09FCF005F2206 /* ApiClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		AE5DE6A921D0943D005F2206 /* safe-doggoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "safe-doggoUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE5DE6AD21D0943D005F2206 /* safe_doggoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = safe_doggoUITests.swift; sourceTree = "<group>"; };
 		AE5DE6AF21D0943D005F2206 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AE5DE6BB21D09FCF005F2206 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 			children = (
 				AE5DE68B21D0943D005F2206 /* AppDelegate.swift */,
 				AE5DE68D21D0943D005F2206 /* HomeViewController.swift */,
+				AE5DE6BB21D09FCF005F2206 /* ApiClient.swift */,
 				AE5DE68F21D0943D005F2206 /* SettingViewController.swift */,
 				AE5DE69121D0943D005F2206 /* Main.storyboard */,
 				AE5DE69421D0943D005F2206 /* Assets.xcassets */,
@@ -262,6 +265,7 @@
 				AE5DE69021D0943D005F2206 /* SettingViewController.swift in Sources */,
 				AE5DE68C21D0943D005F2206 /* AppDelegate.swift in Sources */,
 				AE5DE68E21D0943D005F2206 /* HomeViewController.swift in Sources */,
+				AE5DE6BC21D09FCF005F2206 /* ApiClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
