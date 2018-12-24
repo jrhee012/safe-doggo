@@ -14,6 +14,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     var lat: String!
     
     var locationManager = CLLocationManager()
+    let weatherApiClient = OpenWeatherMapClient()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,9 +43,16 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         print("user latitude = \(userLocation.coordinate.latitude)")
         print("user longitude = \(userLocation.coordinate.longitude)")
         
-        self.long = String(userLocation.coordinate.longitude)
-        self.lat = String(userLocation.coordinate.latitude)
+//        self.long = String(userLocation.coordinate.longitude)
+//        self.lat = String(userLocation.coordinate.latitude)
         
+        var lat = String(userLocation.coordinate.latitude)
+//        lat = String(lat[lat.startIndex...lat.index(lat.startIndex, offsetBy: 4)])
+        
+        var long = String(userLocation.coordinate.longitude)
+//        long = String(long[long.startIndex...long.index(long.startIndex, offsetBy: 4)])
+        
+        weatherApiClient.makeRequest(lat: lat, long: long)
 //        print(self.long, self.lat)
     }
     

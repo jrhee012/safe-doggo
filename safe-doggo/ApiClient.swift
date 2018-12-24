@@ -14,13 +14,14 @@ class ApiClient {
         var result:NSDictionary = [:]
         
         let task = URLSession.shared.dataTask(with: request as URLRequest) {(data, response, error) in
+            guard let data = data, error == nil else { return }
+            
             do {
-                if let convertedJsonIntoDict = try JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary {
-                    result = convertedJsonIntoDict
-                    semaphore.signal()
-                }
+                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! NSDictionary
+                result = json
+                semaphore.signal()
             } catch let error as NSError {
-                print(error.localizedDescription)
+                print(error)
             }
         }
         
@@ -58,15 +59,16 @@ class OpenWeatherMapClient: ApiClient {
     let apiKey: String = "6f31a9738232e5edd96eb2bbc1edd406"
     
     private func createURLWithString(lat: String, long: String) -> NSURL? {
-        let urlString = "api.openweathermap.org/data/2.5/weather?lat=\(lat)&long=\(long)&APPID=\(self.apiKey)"
+        let urlString = "https://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(long)&APPID=\(self.apiKey)"
         return NSURL(string: urlString)
     }
     
-    public func makeRequest(lat: String, long: String) {
+    public func makeRequest(lat: String, long: String) -> NSDictionary {
         let url = self.createURLWithString(lat: lat, long: long)
         let request = NSMutableURLRequest(url:url! as URL);
         request.httpMethod = "GET"
         let results = super.syncRequest(request: request)
-        print(results)
+//        print(results)
+        return results
     }
 }
