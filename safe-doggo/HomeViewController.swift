@@ -10,7 +10,6 @@ import UIKit
 import CoreLocation
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate {
-    @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var currentTempLabel: UILabel!
     @IBOutlet weak var tempUnitLabel: UILabel!
     
@@ -23,7 +22,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        locationLabel.text = "Loading..."
         currentTempLabel.text = "--"
         tempUnitLabel.text = "˚F"
         self.title = "Home"
