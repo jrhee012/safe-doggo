@@ -12,11 +12,13 @@ import CoreLocation
 class LocationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate {
     @IBOutlet weak var locationSettingTabelView: UITableView!
     @IBOutlet weak var searchBarView: UISearchBar!
+    @IBOutlet weak var searchResultTableView: UITableView!
     
     var long: String!
     var lat: String!
     var locationManager = CLLocationManager()
     let CellIdentifier = "LocationSettingTableCellView"
+    let SearchCellIdentifier = "SearchTableCellView"
     let data = ["Use device location", "Search"]
     var checked: [Bool] = []
     
@@ -25,48 +27,81 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         // Do any additional setup after loading the view, typically from a nib.
         
         self.title = "Location"
+        
+        locationSettingTabelView.tag = 0
+        searchResultTableView.tag = 1
+        
         //        locationSettingTabelView.dataSource = self
         checked = [Bool](repeating: false, count: self.data.count)
+        
+        
         locationSettingTabelView.dataSource = self
         locationSettingTabelView.delegate = self
         locationSettingTabelView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifier)
+        
+        searchResultTableView.dataSource = self
+        searchResultTableView.delegate = self
+        searchResultTableView.register(UITableViewCell.self, forCellReuseIdentifier: SearchCellIdentifier)
+        
         searchBarView.isUserInteractionEnabled = false
         searchBarView.alpha = 0.5
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
-        let option = cell?.textLabel?.text as! String
-        
-        if option == "Search" {
-            // search bar
-            searchBarView.isUserInteractionEnabled = true
-            searchBarView.alpha = 1.0
-            searchBarView.delegate = self
-        } else {
-            // search bar
-            searchBarView.isUserInteractionEnabled = false
-            searchBarView.alpha = 0.5
+        if tableView.tag == 0 {
+            let option = cell?.textLabel?.text as! String
             
-            // device location
-            locationManager.delegate = self
-            if CLLocationManager.authorizationStatus() == .notDetermined {
-                self.locationManager.requestWhenInUseAuthorization()
+            if option == "Search" {
+                // search bar
+                searchBarView.isUserInteractionEnabled = true
+                searchBarView.alpha = 1.0
+                searchBarView.delegate = self
+            } else {
+                // search bar
+                searchBarView.isUserInteractionEnabled = false
+                searchBarView.alpha = 0.5
+                
+                // device location
+                locationManager.delegate = self
+                if CLLocationManager.authorizationStatus() == .notDetermined {
+                    self.locationManager.requestWhenInUseAuthorization()
+                }
+                locationManager.distanceFilter = kCLDistanceFilterNone
+                locationManager.desiredAccuracy = kCLLocationAccuracyBest
+                locationManager.startUpdatingLocation()
             }
-            locationManager.distanceFilter = kCLDistanceFilterNone
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.startUpdatingLocation()
+        } else if tableView.tag == 1 {
+            print("!!!!!")
+            let option = cell?.textLabel?.text as! String
+            print(option)
         }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier, for: indexPath)
-        cell.textLabel?.text = self.data[indexPath.row]
+        var cell: UITableViewCell
+        if tableView.tag == 0 {
+            cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier, for: indexPath)
+            cell.textLabel?.text = self.data[indexPath.row]
+        } else if tableView.tag == 1 {
+            cell = tableView.dequeueReusableCell(withIdentifier: SearchCellIdentifier, for: indexPath)
+            cell.textLabel?.text = self.data[indexPath.row]
+        } else {
+            cell = tableView.dequeueReusableCell(withIdentifier: SearchCellIdentifier, for: indexPath)
+            cell.textLabel?.text = self.data[indexPath.row]
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.data.count
+        if tableView.tag == 0 {
+            return self.data.count
+        } else if tableView.tag == 1 {
+            return self.data.count
+        } else {
+            return self.data.count
+        }
     }
     
     
@@ -90,7 +125,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
 //    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
 //        print("1")
 //    }
-//    
+//
 //    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
 //        print("2")
 //    }
@@ -98,5 +133,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("@")
         print(searchBar.text)
+        let apiClient = OpenStreetMapClient()
+        let result = apiClient.makeRequest(city: searchBar.text!)
     }
 }
