@@ -77,7 +77,7 @@ class OpenWeatherMapClient: ApiClient {
 class OpenStreetMapClient: ApiClient {
     let baseUrl = "https://nominatim.openstreetmap.org/search?format=json&q="
     
-    public func makeRequest(city: String) -> NSArray {
+    public func makeRequest(city: String) -> [NSDictionary] {
         let inputString = city
         let stringToArray = inputString.components(separatedBy: " ")
         let stringFromArray = stringToArray.joined(separator: "%20")
@@ -86,13 +86,13 @@ class OpenStreetMapClient: ApiClient {
         request.httpMethod = "GET"
         
         let semaphore = DispatchSemaphore(value: 0)
-        var result:NSArray = []
+        var result: [NSDictionary] = []
         
         let task = URLSession.shared.dataTask(with: request as URLRequest) {(data, response, error) in
             guard let data = data, error == nil else { return }
             print(data)
             do {
-                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! NSArray
+                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [NSDictionary]
                 result = json
                 semaphore.signal()
             } catch let error as NSError {

@@ -16,10 +16,13 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     
     var long: String!
     var lat: String!
+//    var searchResults: NSArray = []
     var locationManager = CLLocationManager()
     let CellIdentifier = "LocationSettingTableCellView"
     let SearchCellIdentifier = "SearchTableCellView"
     let data = ["Use device location", "Search"]
+    var searchResult: [String] = []
+    var searchMap: NSMutableDictionary = [:]
     var checked: [Bool] = []
     
     override func viewDidLoad() {
@@ -49,9 +52,9 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
+        let option = cell?.textLabel?.text as! String
+        
         if tableView.tag == 0 {
-            let option = cell?.textLabel?.text as! String
-            
             if option == "Search" {
                 // search bar
                 searchBarView.isUserInteractionEnabled = true
@@ -73,8 +76,16 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
             }
         } else if tableView.tag == 1 {
             print("!!!!!")
-            let option = cell?.textLabel?.text as! String
             print(option)
+            var result: NSDictionary = [:]
+            for (key, value) in searchMap as! [String: NSDictionary] {
+                if key == option {
+                    result = value
+                }
+            }
+            self.lat = result["lat"] as? String
+            self.long = result["lon"] as? String
+//            print(selection)
         }
         
     }
@@ -86,7 +97,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
             cell.textLabel?.text = self.data[indexPath.row]
         } else if tableView.tag == 1 {
             cell = tableView.dequeueReusableCell(withIdentifier: SearchCellIdentifier, for: indexPath)
-            cell.textLabel?.text = self.data[indexPath.row]
+            cell.textLabel?.text = self.searchResult[indexPath.row] as! String
         } else {
             cell = tableView.dequeueReusableCell(withIdentifier: SearchCellIdentifier, for: indexPath)
             cell.textLabel?.text = self.data[indexPath.row]
@@ -98,7 +109,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         if tableView.tag == 0 {
             return self.data.count
         } else if tableView.tag == 1 {
-            return self.data.count
+            return self.searchResult.count
         } else {
             return self.data.count
         }
@@ -106,6 +117,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     
     
     @IBAction func updateButtonAction(_ sender: Any) {
+        print(self.lat, self.long)
         navigationController?.popViewController(animated: true)
     }
     
@@ -134,6 +146,17 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         print("@")
         print(searchBar.text)
         let apiClient = OpenStreetMapClient()
-        let result = apiClient.makeRequest(city: searchBar.text!)
+        let results = apiClient.makeRequest(city: searchBar.text!)
+//        self.searchResults = result
+        for result in results {
+            let name = result["display_name"] as! String
+            print(name)
+            searchResult.append(name)
+            searchMap[name] = result
+        }
+        
+        searchResultTableView.reloadData()
+        
+
     }
 }
