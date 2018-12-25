@@ -53,7 +53,7 @@ class HomeViewController: UIViewController {
         let apiResult = weatherApiClient.makeRequest(lat: lat, long: long)
         
         let titleStr = apiResult["name"] as? String
-        locationLabel.text = titleStr! // TODO: "" name...
+        locationLabel.text = titleStr! // TODO: "" empty string name...
         
         let main = apiResult["main"] as! NSDictionary
         let tempInt = Int(floor(Float("\(main["temp"].unsafelyUnwrapped)")!))

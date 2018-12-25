@@ -16,7 +16,6 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     
     var long: String!
     var lat: String!
-//    var searchResults: NSArray = []
     var locationManager = CLLocationManager()
     let CellIdentifier = "LocationSettingTableCellView"
     let SearchCellIdentifier = "SearchTableCellView"
@@ -34,9 +33,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         locationSettingTabelView.tag = 0
         searchResultTableView.tag = 1
         
-        //        locationSettingTabelView.dataSource = self
         checked = [Bool](repeating: false, count: self.data.count)
-        
         
         locationSettingTabelView.dataSource = self
         locationSettingTabelView.delegate = self
@@ -52,7 +49,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
-        let option = cell?.textLabel?.text as! String
+        let option = cell?.textLabel?.text
         
         if tableView.tag == 0 {
             if option == "Search" {
@@ -75,17 +72,16 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
                 locationManager.startUpdatingLocation()
             }
         } else if tableView.tag == 1 {
-            print("!!!!!")
-            print(option)
             var result: NSDictionary = [:]
+            
             for (key, value) in searchMap as! [String: NSDictionary] {
                 if key == option {
                     result = value
                 }
             }
+            
             self.lat = result["lat"] as? String
             self.long = result["lon"] as? String
-//            print(selection)
         }
         
     }
@@ -97,7 +93,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
             cell.textLabel?.text = self.data[indexPath.row]
         } else if tableView.tag == 1 {
             cell = tableView.dequeueReusableCell(withIdentifier: SearchCellIdentifier, for: indexPath)
-            cell.textLabel?.text = self.searchResult[indexPath.row] as! String
+            cell.textLabel?.text = self.searchResult[indexPath.row]
         } else {
             cell = tableView.dequeueReusableCell(withIdentifier: SearchCellIdentifier, for: indexPath)
             cell.textLabel?.text = self.data[indexPath.row]
@@ -117,45 +113,29 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     
     
     @IBAction func updateButtonAction(_ sender: Any) {
-        print(self.lat, self.long)
-        
-//        navigationController?.popViewController(animated: true)
         let root = navigationController?.viewControllers[0] as! HomeViewController
+        
         root.long = self.long as String
         root.lat = self.lat as String
         root.updateView()
         
-//        print(root.long, root.lat)
         navigationController?.popToRootViewController(animated: true)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation:CLLocation = locations[0] as CLLocation
+//
+//        print("user latitude = \(userLocation.coordinate.latitude)")
+//        print("user longitude = \(userLocation.coordinate.longitude)")
         
-        print("user latitude = \(userLocation.coordinate.latitude)")
-        print("user longitude = \(userLocation.coordinate.longitude)")
-        
-        let lat = String(userLocation.coordinate.latitude)
-        let long = String(userLocation.coordinate.longitude)
-        
-        self.lat = lat
-        self.long = long
+        self.lat = String(userLocation.coordinate.latitude)
+        self.long = String(userLocation.coordinate.longitude)
     }
     
-//    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-//        print("1")
-//    }
-//
-//    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-//        print("2")
-//    }
-    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("@")
-        print(searchBar.text)
         let apiClient = OpenStreetMapClient()
         let results = apiClient.makeRequest(city: searchBar.text!)
-//        self.searchResults = result
+        
         for result in results {
             let name = result["display_name"] as! String
             print(name)
@@ -164,7 +144,5 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         
         searchResultTableView.reloadData()
-        
-
     }
 }
