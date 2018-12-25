@@ -19,19 +19,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Temp:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mnh-UI-GtU">
-                                <rect key="frame" x="20" y="119" width="110" height="21"/>
+                                <rect key="frame" x="20" y="201" width="110" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="213" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sDa-Kf-EqM">
-                                <rect key="frame" x="138" y="119" width="28" height="21"/>
+                                <rect key="frame" x="138" y="201" width="28" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25R-Pi-9l4">
-                                <rect key="frame" x="174" y="119" width="20" height="21"/>
+                                <rect key="frame" x="174" y="201" width="20" height="21"/>
                                 <string key="text" base64-UTF8="YES">
 AwPLmkM
 </string>
@@ -39,15 +39,26 @@ AwPLmkM
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please update your location setting." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sfg-Dd-QRn">
+                                <rect key="frame" x="20" y="108" width="374" height="76"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="mnh-UI-GtU" firstAttribute="baseline" secondItem="sDa-Kf-EqM" secondAttribute="baseline" id="0Yc-Mj-Ywr"/>
-                            <constraint firstItem="mnh-UI-GtU" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="6NN-oX-2Rg"/>
-                            <constraint firstItem="mnh-UI-GtU" firstAttribute="baseline" secondItem="25R-Pi-9l4" secondAttribute="baseline" id="F9Q-VT-3eQ"/>
-                            <constraint firstItem="mnh-UI-GtU" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" constant="31" id="Kct-RZ-eaB"/>
-                            <constraint firstItem="sDa-Kf-EqM" firstAttribute="leading" secondItem="mnh-UI-GtU" secondAttribute="trailing" constant="8" symbolic="YES" id="dJS-LI-fOS"/>
-                            <constraint firstItem="25R-Pi-9l4" firstAttribute="leading" secondItem="sDa-Kf-EqM" secondAttribute="trailing" constant="8" symbolic="YES" id="tCL-oa-LDm"/>
+                            <constraint firstItem="sDa-Kf-EqM" firstAttribute="leading" secondItem="mnh-UI-GtU" secondAttribute="trailing" constant="8" symbolic="YES" id="1Hg-DD-mhj"/>
+                            <constraint firstItem="mnh-UI-GtU" firstAttribute="baseline" secondItem="sDa-Kf-EqM" secondAttribute="baseline" id="2xv-E2-0mb"/>
+                            <constraint firstItem="Sfg-Dd-QRn" firstAttribute="leading" secondItem="mnh-UI-GtU" secondAttribute="leading" id="33l-vL-OXU"/>
+                            <constraint firstItem="mnh-UI-GtU" firstAttribute="firstBaseline" secondItem="sDa-Kf-EqM" secondAttribute="firstBaseline" id="6Xm-sg-WuL"/>
+                            <constraint firstItem="mnh-UI-GtU" firstAttribute="top" secondItem="Sfg-Dd-QRn" secondAttribute="bottom" constant="17" id="ADu-wA-VaQ"/>
+                            <constraint firstItem="25R-Pi-9l4" firstAttribute="leading" secondItem="sDa-Kf-EqM" secondAttribute="trailing" constant="8" symbolic="YES" id="BiB-o3-Uml"/>
+                            <constraint firstItem="Sfg-Dd-QRn" firstAttribute="trailing" secondItem="tsR-hK-woN" secondAttribute="trailingMargin" id="V2Y-UA-PkY"/>
+                            <constraint firstItem="Sfg-Dd-QRn" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="Wm9-ZD-lEi"/>
+                            <constraint firstItem="Sfg-Dd-QRn" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" constant="20" id="bjz-uw-SdS"/>
+                            <constraint firstItem="PQr-Ze-W5v" firstAttribute="bottom" secondItem="mnh-UI-GtU" secondAttribute="bottom" constant="591" id="ugS-LM-wQM"/>
+                            <constraint firstItem="sDa-Kf-EqM" firstAttribute="baseline" secondItem="25R-Pi-9l4" secondAttribute="baseline" id="wfm-4B-4ez"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
@@ -60,6 +71,7 @@ AwPLmkM
                     </navigationItem>
                     <connections>
                         <outlet property="currentTempLabel" destination="sDa-Kf-EqM" id="vfo-pl-9yS"/>
+                        <outlet property="locationLabel" destination="Sfg-Dd-QRn" id="gZT-jD-5hc"/>
                         <outlet property="tempUnitLabel" destination="25R-Pi-9l4" id="Rbh-mu-LXS"/>
                     </connections>
                 </viewController>

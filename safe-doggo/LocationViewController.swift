@@ -118,7 +118,15 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBAction func updateButtonAction(_ sender: Any) {
         print(self.lat, self.long)
-        navigationController?.popViewController(animated: true)
+        
+//        navigationController?.popViewController(animated: true)
+        let root = navigationController?.viewControllers[0] as! HomeViewController
+        root.long = self.long as String
+        root.lat = self.lat as String
+        root.updateView()
+        
+//        print(root.long, root.lat)
+        navigationController?.popToRootViewController(animated: true)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
