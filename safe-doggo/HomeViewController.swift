@@ -12,6 +12,7 @@ import CoreLocation
 class HomeViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var currentTempLabel: UILabel!
+    @IBOutlet weak var tempUnitLabel: UILabel!
     
     var long: String!
     var lat: String!
@@ -24,7 +25,15 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         locationLabel.text = "Loading..."
         currentTempLabel.text = "--"
+        tempUnitLabel.text = "˚F"
+        self.title = "Home"
         
+//        let nav = self.navigationController?.navigationBar
+//        nav?.tintColor = UIColor.white
+//        nav?.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+
         locationManager.delegate = self
         
         if CLLocationManager.authorizationStatus() == .notDetermined {
@@ -53,12 +62,13 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         
         let apiResult = weatherApiClient.makeRequest(lat: lat, long: long)
         
-        let str = apiResult["name"] as? String
+        let titleStr = apiResult["name"] as? String
         
 //        print(apiResult)
         
         // update
-        locationLabel.text = str!
+//        locationLabel.text = titleStr!
+        self.title = titleStr!
         
         let main = apiResult["main"] as! NSDictionary
 //        currentTempLabel.text = "\(main["temp"].unsafelyUnwrapped)"

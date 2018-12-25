@@ -57,9 +57,10 @@ class ApiClient {
 
 class OpenWeatherMapClient: ApiClient {
     let apiKey: String = "6f31a9738232e5edd96eb2bbc1edd406"
+    var units = "imperial"
     
     private func createURLWithString(lat: String, long: String) -> NSURL? {
-        let urlString = "https://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(long)&APPID=\(self.apiKey)&units=imperial"
+        let urlString = "https://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(long)&APPID=\(self.apiKey)&units=\(units)"
         return NSURL(string: urlString)
     }
     
