@@ -77,7 +77,7 @@ AwPLmkM
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2504" y="-320"/>
+            <point key="canvasLocation" x="1658" y="-320"/>
         </scene>
         <!--Setting-->
         <scene sceneID="wg7-f3-ORb">
@@ -163,7 +163,7 @@ AwPLmkM
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="0.0" y="0.0"/>
+            <point key="canvasLocation" x="-152" y="0.0"/>
         </scene>
         <!--Setting Nav Bar-->
         <scene sceneID="C8B-9V-WTv">
@@ -282,7 +282,7 @@ AwPLmkM
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kdo-HU-xSt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3378" y="-599"/>
+            <point key="canvasLocation" x="2525" y="-320"/>
         </scene>
     </scenes>
     <resources>
