@@ -81,7 +81,7 @@ class HomeViewController: UIViewController {
     }
     
     private func getSavedUnit() {
-        currentUnits = userDefaults.object(forKey: "units") as! String
+        currentUnits = userDefaults.object(forKey: "units") as? String ?? "imperial"
     }
     
     private func updateTempUnit() {
