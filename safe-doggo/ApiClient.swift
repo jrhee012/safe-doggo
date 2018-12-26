@@ -55,9 +55,30 @@ class ApiClient {
     }
 }
 
+enum Units {
+    case metric
+    case imperial
+    
+    init(value: String) {
+        switch value {
+        case "metric": self = .metric
+        case "imperial": self = .imperial
+        default: self = .imperial
+        }
+    }
+}
+
 class OpenWeatherMapClient: ApiClient {
     let apiKey: String = "6f31a9738232e5edd96eb2bbc1edd406"
     var units = "imperial"
+    
+    init(units: String) {
+        if Units(value: units) == .metric {
+            self.units = "metric"
+        } else {
+            self.units = "imperial"
+        }
+    }
     
     private func createURLWithString(lat: String, long: String) -> NSURL? {
         let urlString = "https://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(long)&APPID=\(self.apiKey)&units=\(units)"
@@ -71,6 +92,14 @@ class OpenWeatherMapClient: ApiClient {
         let results = super.syncRequest(request: request)
 //        print(results)
         return results
+    }
+    
+    public func updateUnits() {
+        if self.units == "imperial" {
+            self.units = "metric"
+        } else {
+            self.units = "imperial"
+        }
     }
 }
 

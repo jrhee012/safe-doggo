@@ -15,8 +15,9 @@ class HomeViewController: UIViewController {
     
     var long = ""
     var lat = ""
+    var currentUnits = "imperial"
     
-    let weatherApiClient = OpenWeatherMapClient()
+    let weatherApiClient = OpenWeatherMapClient(units: "imperial")
     let userDefaults = UserDefaults.standard
     
     override func viewDidLoad() {
@@ -30,7 +31,10 @@ class HomeViewController: UIViewController {
         self.updateView()
     }
     
-    func updateView() {
+    public func updateView() {
+        let units = userDefaults.object(forKey: "units") as? String ?? "imperial"
+        self.currentUnits = units
+        
         var lat = self.lat
         var long = self.long
         
