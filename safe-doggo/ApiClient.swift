@@ -94,12 +94,8 @@ class OpenWeatherMapClient: ApiClient {
         return results
     }
     
-    public func updateUnits() {
-        if self.units == "imperial" {
-            self.units = "metric"
-        } else {
-            self.units = "imperial"
-        }
+    public func updateUnits(units: String) {
+        self.units = units
     }
 }
 

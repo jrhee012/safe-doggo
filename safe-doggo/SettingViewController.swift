@@ -11,10 +11,15 @@ import UIKit
 class SettingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var unitsTableView: UITableView!
     
-//    var unitsChecked: [Bool]!
+    @IBAction func saveButtonAction(_ sender: Any) {
+        tabBarController?.selectedIndex = 0
+    }
+    
     var unitsData = ["Imperial (˚F)", "Metric (˚C)"]
     let unitsTableCellIdentifier = "unitsCell"
     var unitChecked = "imperial"
+    
+    let userDefaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +27,8 @@ class SettingViewController: UIViewController, UITableViewDataSource, UITableVie
         
         self.title = "Setting"
         
-//        unitsChecked = [Bool](repeating: false, count: self.unitsData.count)
-//        unitsChecked[0] = true
+        // load saved settings
+        self.getSavedUnit()
         
         unitsTableView.tag = 0
         unitsTableView.dataSource = self
@@ -37,13 +42,15 @@ class SettingViewController: UIViewController, UITableViewDataSource, UITableVie
         
         if tableView.tag == 0 {
             unitsTableView.deselectRow(at: indexPath, animated: true)
-//            unitsChecked[indexPath.row] = !unitsChecked[indexPath.row]
-//            print(unitsChecked)
+
             if indexPath[1] == 1 {
                 unitChecked = "metric"
             } else {
                 unitChecked = "imperial"
             }
+            
+            // save unit setting
+            self.saveUnit()
             
             unitsTableView.reloadData()
         } else {
@@ -57,7 +64,6 @@ class SettingViewController: UIViewController, UITableViewDataSource, UITableVie
         if tableView.tag == 0 {
             cell = tableView.dequeueReusableCell(withIdentifier: unitsTableCellIdentifier, for: indexPath)
             cell.textLabel?.text = self.unitsData[indexPath.row]
-            
             if indexPath[1] == 1 && self.unitChecked == "metric" {
                 cell.accessoryType = .checkmark
             } else if indexPath[1] == 0 && self.unitChecked == "imperial" {
@@ -81,6 +87,14 @@ class SettingViewController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
 
-
+    private func saveUnit() {
+        userDefaults.set(self.unitChecked, forKey: "units")
+        userDefaults.synchronize()
+    }
+    
+    private func getSavedUnit() {
+        let savedUnit = userDefaults.object(forKey: "units") as? String ?? "imperial"
+        self.unitChecked = savedUnit
+    }
 }
 

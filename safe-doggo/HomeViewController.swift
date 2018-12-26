@@ -20,12 +20,22 @@ class HomeViewController: UIViewController {
     let weatherApiClient = OpenWeatherMapClient(units: "imperial")
     let userDefaults = UserDefaults.standard
     
+    override func viewWillAppear(_: Bool) {
+        super.viewWillAppear(true)
+        
+        //call your data populating/API calls from here
+        self.viewDidLoad()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         currentTempLabel.text = "--"
-        tempUnitLabel.text = "˚F"
+        
+        self.getSavedUnit()
+        self.updateTempUnit()
+        
         self.title = "Home"
         
         self.updateView()
@@ -54,6 +64,7 @@ class HomeViewController: UIViewController {
         userDefaults.set(long, forKey: "long")
         userDefaults.synchronize()
         
+        weatherApiClient.updateUnits(units: self.currentUnits)
         let apiResult = weatherApiClient.makeRequest(lat: lat, long: long)
         
         let titleStr = apiResult["name"] as? String
@@ -67,6 +78,19 @@ class HomeViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    private func getSavedUnit() {
+        currentUnits = userDefaults.object(forKey: "units") as! String
+    }
+    
+    private func updateTempUnit() {
+        let units = self.currentUnits
+        if units == "imperial" {
+            tempUnitLabel.text = "˚F"
+        } else {
+            tempUnitLabel.text = "˚C"
+        }
     }
 }
 
