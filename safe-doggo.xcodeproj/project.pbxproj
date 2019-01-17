@@ -17,6 +17,7 @@
 		AE5DE6AE21D0943D005F2206 /* safe_doggoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5DE6AD21D0943D005F2206 /* safe_doggoUITests.swift */; };
 		AE5DE6BC21D09FCF005F2206 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5DE6BB21D09FCF005F2206 /* ApiClient.swift */; };
 		AE5DE6C021D1B8A9005F2206 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5DE6BF21D1B8A9005F2206 /* LocationViewController.swift */; };
+		AE6A665721D881B600974F19 /* ResponseBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A665621D881B600974F19 /* ResponseBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		AE5DE6AF21D0943D005F2206 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE5DE6BB21D09FCF005F2206 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		AE5DE6BF21D1B8A9005F2206 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
+		AE6A665621D881B600974F19 /* ResponseBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ResponseBuilder.swift; path = utils/ResponseBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				AE5DE68F21D0943D005F2206 /* SettingViewController.swift */,
 				AE5DE69121D0943D005F2206 /* Main.storyboard */,
 				AE5DE6BF21D1B8A9005F2206 /* LocationViewController.swift */,
+				AE6A665621D881B600974F19 /* ResponseBuilder.swift */,
 				AE5DE69421D0943D005F2206 /* Assets.xcassets */,
 				AE5DE69621D0943D005F2206 /* LaunchScreen.storyboard */,
 				AE5DE69921D0943D005F2206 /* Info.plist */,
@@ -269,6 +272,7 @@
 				AE5DE69021D0943D005F2206 /* SettingViewController.swift in Sources */,
 				AE5DE68C21D0943D005F2206 /* AppDelegate.swift in Sources */,
 				AE5DE68E21D0943D005F2206 /* HomeViewController.swift in Sources */,
+				AE6A665721D881B600974F19 /* ResponseBuilder.swift in Sources */,
 				AE5DE6BC21D09FCF005F2206 /* ApiClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

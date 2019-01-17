@@ -136,6 +136,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         let apiClient = OpenStreetMapClient()
         let results = apiClient.makeRequest(city: searchBar.text!)
         
+        searchResult = []
         for result in results {
             let name = result["display_name"] as! String
             print(name)

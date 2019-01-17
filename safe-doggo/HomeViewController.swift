@@ -117,16 +117,19 @@ class HomeViewController: UIViewController {
         }
     }
     
+    private func setTextResponseView(resp: ResponseBuilder) {
+        textResponseView.text = resp.getTextResponse()
+    }
+    
+    private func setImageView(resp: ResponseBuilder) {
+        imageView.image = resp.getImageResponse()
+    }
+    
     private func loadContents(temp: Int) {
-        print(temp)
+        let respBuilder = ResponseBuilder(temp: String(temp), units: self.currentUnits)
         
-        // set image view image
-        let image = UIImage(named: "bambi")
-        imageView.image = image
-        
-        // set text view text
-        let text: String = "HEY!!! Its cold..."
-        textResponseView.text = text
+        self.setImageView(resp: respBuilder)
+        self.setTextResponseView(resp: respBuilder)
     }
 }
 
